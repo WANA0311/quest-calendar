@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>入社までのクエスト</title>
+<meta name="theme-color" content="#10171c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="クエスト">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">QUEST LOG</div>
+      <h1>入社までのクエスト</h1>
+    </div>
+    <button id="openSettings" class="icon-btn" type="button" aria-label="設定">⚙</button>
+  </header>
+
+  <div class="counts">
+    <div class="count fe"><b id="cFe">--</b><span id="cFeLabel">基本情報まで（日）</span></div>
+    <div class="count"><b id="cJoin">--</b><span>入社まで（日）</span></div>
+  </div>
+
+  <section class="cal" aria-label="カレンダー">
+    <div class="cal-head">
+      <button id="prevM" class="icon-btn" type="button" aria-label="前の月">◀</button>
+      <h2 id="monthLabel">--</h2>
+      <button id="nextM" class="icon-btn" type="button" aria-label="次の月">▶</button>
+    </div>
+    <div class="dow"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+    <div class="grid" id="grid"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <article class="quest" aria-live="polite">
+    <div class="q-date" id="qDate">--</div>
+    <div class="phase"><span class="name" id="phaseName">--</span><span class="tag" id="phaseTag"></span></div>
+    <div class="event" id="event" hidden></div>
+    <ul class="tasks" id="tasks"></ul>
+    <div class="xp"><span id="xpText">0 / 0</span><div class="bar"><i id="xpBar"></i></div></div>
+    <div class="clear" id="clear" hidden>STAGE CLEAR!</div>
+    <button id="toToday" class="link-btn" type="button" hidden>今日に戻る</button>
+  </article>
+</div>
+
+<dialog id="settings">
+  <form method="dialog" class="sheet">
+    <h2>設定</h2>
+    <label class="field" for="feDate">基本情報の受験日
+      <input type="date" id="feDate" min="2026-11-24" max="2026-12-19">
+      <small>予約した日に変えると、仕上げ期間と受験日の表示が自動で調整されます</small>
+    </label>
+    <div class="field">
+      <span>毎朝の通知</span>
+      <button type="button" id="icsBtn" class="primary">カレンダーに通知を追加</button>
+      <small>スマホのカレンダーに毎朝7:50の「今日のクエスト」と大事な日を登録します。受験日を変えたら、古い予定を消してからもう一度追加してください。</small>
+    </div>
+    <div class="field">
+      <span>バックアップ</span>
+      <div class="row">
+        <button type="button" id="exportBtn">書き出す</button>
+        <label class="file-btn" for="importFile">読み込む</label>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+      <small>チェックの記録はこの端末だけに保存されます。機種変更のときは書き出したファイルを読み込んでください。</small>
+    </div>
+    <p class="msg" id="settingsMsg" role="status"></p>
+    <button value="close" class="primary">閉じる</button>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
