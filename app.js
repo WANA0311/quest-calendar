@@ -3,7 +3,7 @@
 
   // ===== 計画データ =====
   const JOIN_DAY = "2027-04-01";
-  const FIRST_DAY = "2026-10-02";
+  const FIRST_DAY = "2026-10-07";
   const LS_DONE = "quest-done-v1", LS_FE = "quest-fe-date";
   const KIND = { start: "start", fe: "fe", dev: "dev", ap: "ap", free: "free" };
   const KIND_LABEL = { start: "準備", fe: "基本情報", dev: "開発", ap: "応用情報", free: "自由・入社" };
@@ -14,8 +14,8 @@
 
   function buildPhases() {
     return [
-      { id: "start", kind: KIND.start, name: "準備", from: "2026-10-02", to: "2026-10-04", tag: "スタートダッシュ" },
-      { id: "feA", kind: KIND.fe, name: "基本情報 科目A", from: "2026-10-05", to: "2026-10-31", tag: "過去問道場で知識固め" },
+      { id: "start", kind: KIND.start, name: "準備", from: "2026-10-07", to: "2026-10-08", tag: "スタートダッシュ" },
+      { id: "feA", kind: KIND.fe, name: "基本情報 科目A", from: "2026-10-09", to: "2026-10-31", tag: "過去問道場で知識固め" },
       { id: "feB", kind: KIND.fe, name: "基本情報 科目B", from: "2026-11-01", to: "2026-11-22", tag: "擬似言語のトレース" },
       { id: "feFinal", kind: KIND.fe, name: "基本情報 仕上げ", from: "2026-11-23", to: addDays(feDay, -1), tag: "時間を計って通し演習" },
       { id: "feExam", kind: KIND.fe, name: "基本情報 受験日", from: feDay, to: feDay, tag: "BOSS BATTLE" },
@@ -31,7 +31,7 @@
   }
   function events() {
     const e = {
-      "2026-10-02": "今日から開始！まずは受験日を予約しよう",
+      "2026-10-07": "今日からスタート！受験日は12月11日",
       "2027-01-27": "応用情報 後期の申込受付スタート",
       "2027-02-16": "応用情報 申込締切日！",
       "2027-04-01": "入社おめでとう！"
@@ -50,17 +50,15 @@
     const field = dow === 0 ? "総復習" : FIELDS_A[dow];
     switch (ph.id) {
       case "start": return [
-        [{ id: "s1", title: "基本情報のCBT受験日を予約する", note: "12月11日に予約済み", time: "10分" },
-         { id: "s2", title: "参考書を1冊選ぶ", note: "科目B対策が厚いもの", time: "20分" },
-         { id: "s3", title: "過去問道場を10問だけ解いてみる", note: "今の実力チェック", time: "20分" }],
+        [{ id: "s2", title: "参考書の目次を見て全体像をつかむ", note: "『いちばんやさしい基本情報技術者』", time: "20分" },
+         { id: "s3", title: "過去問道場を10問だけ解いてみる", note: "今の実力チェック", time: "20分" },
+         { id: "s7", title: "12月までの勉強時間をカレンダーに入れる", time: "10分" }],
         [{ id: "s4", title: "過去問道場 20問", note: "分野ごとの正答率をメモ", time: "40分" },
-         { id: "s5", title: "UnityプロジェクトをGit管理にする", note: "git init → GitHubにpush", time: "30分" }, thesis],
-        [{ id: "s6", title: "過去問道場 20問", note: "間違えた問題の解説を読む", time: "40分" },
-         { id: "s7", title: "10月の勉強時間をカレンダーに入れる", time: "10分" }, thesis]
-      ][Math.min(i, 2)];
+         { id: "s5", title: "UnityプロジェクトをGit管理にする", note: "git init → GitHubにpush", time: "30分" }, thesis]
+      ][Math.min(i, 1)];
       case "feA": return [
         { id: "a1", title: "科目A 過去問25問：" + field, note: dow === 0 ? FIELDS_A[0] : "正答率7〜8割が目標", time: "50分" },
-        { id: "a2", title: "間違えた問題の解説を読む", note: "用語はノートに1行でまとめる", time: "15分" }, thesis, game];
+        { id: "a2", title: "間違えた所を参考書で確認する", note: "『いちばんやさしい』の該当ページを読む", time: "20分" }, thesis, game];
       case "feB": return [
         { id: "b1", title: "科目B 擬似言語 " + (2 + (i % 2)) + "問をトレース", note: "変数の値を紙に書いて追う", time: "60分" },
         { id: "b2", title: "科目B セキュリティ 1問", note: "IPAのサンプル・公開問題から", time: "15分" },

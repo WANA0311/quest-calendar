@@ -1,5 +1,5 @@
 // オフラインでも動くように、アプリのファイルを端末にキャッシュする
-const CACHE = "quest-v2";
+const CACHE = "quest-v4";
 const FILES = ["./", "./index.html", "./app.js", "./style.css", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
 
